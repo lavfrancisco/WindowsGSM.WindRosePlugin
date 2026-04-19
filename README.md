@@ -1,14 +1,63 @@
 # WindowsGSM.WindRose
+
+[English](#english) | [Português](#português)
+
+---
+
+## English
+
+Plugin for **WindRose** Dedicated Server support in WindowsGSM.
+
+### Author
+* **Luiz Francisco**
+
+### Download
+You can download the latest stable version here:
+**[Download WindRose Plugin v1.0.0](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.0/WindowsGSM.WindRose.zip)**
+
+### Option 1: Manual Installation (Recommended)
+
+The WindowsGSM automatic installer may encounter naming errors (e.g., `zip.cs`). To ensure it works correctly, follow these steps:
+
+1. Navigate to the folder where your **WindowsGSM.exe** is installed.
+2. Open the `plugins` folder.
+3. Create a new folder named exactly **`WindRose.cs`**.
+4. Download the `WindRose.cs` file (and the images) from this repository and place them inside that folder.
+5. Restart WindowsGSM.
+
+**Correct folder structure:**
+`WindowsGSM/plugins/WindRose.cs/WindRose.cs`
+
+### Option 2: Import via Interface (Automatic)
+
+If you downloaded the structured `.zip` file, you can use the built-in WindowsGSM installer:
+
+1. In WindowsGSM, click the **Plugins** icon (puzzle piece) on the left sidebar.
+2. Click the **Import** button at the top of the window.
+3. Select the `WindRose.zip` file.
+4. WindowsGSM will automatically extract the files to the correct folder.
+5. **Restart WindowsGSM** for the plugin to appear in the available servers list.
+
+> **Note:** If the server does not appear after importing, verify that the folder `plugins/WindRose.cs` contains the `WindRose.cs` file directly inside it.
+
+### Features
+- [x] Install and Update via SteamCMD (AppID: 4129620).
+- [x] Console Redirect (Real-time logs).
+- [x] Auto-Restart on crash.
+- [x] Integrated native backup.
+
+---
+
+## Português
+
 Plugin para suporte ao servidor dedicado de **WindRose** no WindowsGSM.
 
-## Autor
-* **Luiz Francisco** 
-
-## Download
+### Autor
+* **Luiz Francisco** ### Download
 Você pode baixar a versão mais recente e estável aqui:
 **[Baixar WindRose Plugin v1.0.0](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.0/WindowsGSM.WindRose.zip)**
 
-## Opção 1: Instalar (Manual)
+### Opção 1: Instalar (Manual)
 
 O instalador automático do WindowsGSM pode apresentar erros de nomenclatura (ex: `zip.cs`). Para garantir o funcionamento, siga estes passos:
 
@@ -33,10 +82,8 @@ Se você baixou o arquivo `.zip` estruturado, pode usar o instalador do próprio
 
 > **Nota:** Se após a importação o servidor não aparecer, verifique se a pasta em `plugins/WindRose.cs` contém o arquivo `WindRose.cs` diretamente nela.
 
-## Funcionalidades
+### Funcionalidades
 - [x] Instalação e Update via SteamCMD (AppID: 4129620).
 - [x] Console Redirect (Logs em tempo real).
 - [x] Auto-Restart em caso de crash.
 - [x] Backup nativo integrado.
-
-
