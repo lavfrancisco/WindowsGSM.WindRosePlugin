@@ -1,0 +1,15 @@
+{
+    "name": "WindRose",
+    "author": "Luiz Francisco",
+    "description": "WindowsGSM plugin for supporting WindRose Dedicated Server",
+    "version": "1.0.3",
+    "url": "https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin",
+    "color": "#0763f7",
+    "game": {
+        "appid": "4129620",
+        "login": "anonymous",
+        "executable": "R5/Binaries/Win64/WindroseServer-Win64-Shipping.exe",
+        "default_port": "7777",
+        "query_port": "27015"
+    }
+}
