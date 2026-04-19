@@ -15,7 +15,7 @@ namespace WindowsGSM.Plugins
             name = "WindowsGSM.WindRose", 
             author = "Luiz Francisco",
             description = "WindowsGSM plugin for supporting WindRose Dedicated Server",
-            version = "1.0.3", // Incrementei a versão
+            version = "1.0.3", 
             url = "https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin",
             color = "#0763f7"
         };
@@ -33,8 +33,7 @@ namespace WindowsGSM.Plugins
         public string Port = "7777";
         public string QueryPort = "27015";
         public string Defaultmap = "Default";
-        public string Maxplayers = "16";
-        // REMOVIDO o -log daqui para não duplicar se o usuário colocar no Start Param
+        public string Maxplayers = "16";        
         public string Additional = "-log -nostatustext"; 
 
         public async Task<Process> Start()
@@ -48,7 +47,7 @@ namespace WindowsGSM.Plugins
                 return null;
             }
 
-            // Removido o -log e -unbuffered fixos. Agora usa o que vem do serverData.ServerParam (Additional)
+            
             string param = $" {_serverData.ServerParam} -port={_serverData.ServerPort} -queryport={_serverData.ServerQueryPort} -maxplayers={_serverData.ServerMaxPlayer}";
 
             var p = new Process {
@@ -85,8 +84,7 @@ namespace WindowsGSM.Plugins
             });
         }
 
-        public bool CanBackup => true;
-        // O método Backup() foi removido para usar o nativo da SteamCMDAgent (Full Backup),
-        // evitando confusão sobre o RocksDB que ainda não está implementado via script.
+        
+        
     }
 }
