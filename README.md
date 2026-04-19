@@ -13,7 +13,7 @@ Plugin for **WindRose** Dedicated Server support in WindowsGSM.
 
 ### Download
 You can download the latest stable version here:
-**[Download WindRose Plugin v1.0.3](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.0/WindRose_Plugin_v1.0.3.zip)**
+**[Download WindRose Plugin v1.0.3](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.3/WindowsGSM.WindRose.zip)**
 
 ### Option 1: Manual Installation (Recommended)
 
@@ -55,7 +55,7 @@ Plugin para suporte ao servidor dedicado de **WindRose** no WindowsGSM.
 ### Autor
 * **Luiz Francisco** ### Download
 Você pode baixar a versão mais recente e estável aqui:
-**[Baixar WindRose Plugin v1.0.3](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.0/WindRose_Plugin_v1.0.3.zip)**
+**[Baixar WindRose Plugin v1.0.3](https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin/releases/download/v1.0.3/WindowsGSM.WindRose.zip)**
 
 ### Opção 1: Instalar (Manual)
 
