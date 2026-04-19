@@ -2,7 +2,7 @@
 Plugin para suporte ao servidor dedicado de **WindRose** no WindowsGSM.
 
 ## Autor
-* **Luiz Francisco** ([VemJogar](https://github.com/lavfrancisco))
+* **Luiz Francisco** 
 
 ## Download
 Você pode baixar a versão mais recente e estável aqui:
