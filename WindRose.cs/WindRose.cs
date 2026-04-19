@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using WindowsGSM.Functions;
 using WindowsGSM.GameServer.Query;
@@ -16,7 +15,7 @@ namespace WindowsGSM.Plugins
             name = "WindowsGSM.WindRose", 
             author = "Luiz Francisco",
             description = "WindowsGSM plugin for supporting WindRose Dedicated Server",
-            version = "1.0.0",
+            version = "1.0.3", // Incrementei a versão
             url = "https://github.com/lavfrancisco/WindowsGSM.WindRosePlugin",
             color = "#0763f7"
         };
@@ -24,57 +23,55 @@ namespace WindowsGSM.Plugins
         public override bool loginAnonymous => true;
         public override string AppId => "4129620"; 
 
-        public WindRose(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
         private readonly ServerConfig _serverData;
+        public WindRose(ServerConfig serverData) : base(serverData) => _serverData = serverData;
 
         public override string StartPath => @"R5\Binaries\Win64\WindroseServer-Win64-Shipping.exe";
         public string FullName = "WindRose Dedicated Server";
-        public bool AllowsEmbedConsole = true;
-        public int PortIncrements = 1;
-        public object QueryMethod = new A2S();
-
+        
+        // Default values for the UI
         public string Port = "7777";
         public string QueryPort = "27015";
         public string Defaultmap = "Default";
         public string Maxplayers = "16";
-        public string Additional = "-log -nostatustext";
+        // REMOVIDO o -log daqui para não duplicar se o usuário colocar no Start Param
+        public string Additional = "-log -nostatustext"; 
 
         public async Task<Process> Start()
         {
-            await Task.Yield(); // Resolve o aviso de 'async lacks await'
+            await Task.Yield();
+            string shipExePath = ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
             
-            string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
             if (!File.Exists(shipExePath))
             {
-                base.Error = $"{Path.GetFileName(shipExePath)} não encontrado";
+                base.Error = $"{Path.GetFileName(shipExePath)} not found";
                 return null;
             }
 
-            string param = $" {_serverData.ServerParam} -port={_serverData.ServerPort} -queryport={_serverData.ServerQueryPort} -maxplayers={_serverData.ServerMaxPlayer} -log -unbuffered";
+            // Removido o -log e -unbuffered fixos. Agora usa o que vem do serverData.ServerParam (Additional)
+            string param = $" {_serverData.ServerParam} -port={_serverData.ServerPort} -queryport={_serverData.ServerQueryPort} -maxplayers={_serverData.ServerMaxPlayer}";
 
             var p = new Process {
                 StartInfo = {
                     WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = param,
-                    WindowStyle = ProcessWindowStyle.Hidden,
                     UseShellExecute = false,
-                    RedirectStandardOutput = AllowsEmbedConsole,
-                    RedirectStandardError = AllowsEmbedConsole,
-                    RedirectStandardInput = AllowsEmbedConsole
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
                 },
                 EnableRaisingEvents = true
             };
 
-            if (AllowsEmbedConsole) {
-                var serverConsole = new ServerConsole(_serverData.ServerID);
-                p.OutputDataReceived += serverConsole.AddOutput;
-                p.ErrorDataReceived += serverConsole.AddOutput;
-            }
+            var serverConsole = new ServerConsole(_serverData.ServerID);
+            p.OutputDataReceived += serverConsole.AddOutput;
+            p.ErrorDataReceived += serverConsole.AddOutput;
 
             try {
                 p.Start();
-                if (AllowsEmbedConsole) { p.BeginOutputReadLine(); p.BeginErrorReadLine(); }
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
                 return p;
             } catch (Exception e) { base.Error = e.Message; return null; }
         }
@@ -88,23 +85,8 @@ namespace WindowsGSM.Plugins
             });
         }
 
-        public new async Task<Process> Install()
-        {
-            var steamCMD = new Installer.SteamCMD();
-            return await steamCMD.Install(_serverData.ServerID, string.Empty, AppId, true, loginAnonymous);
-        }
-
-        public new async Task<Process> Update(bool validate = false, string custom = null)
-        {
-            var (p, error) = await Installer.SteamCMD.UpdateEx(_serverData.ServerID, AppId, validate, custom: custom, loginAnonymous: loginAnonymous);
-            return p;
-        }
-
-        public new bool IsInstallValid() => File.Exists(ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath));
-        public new bool IsImportValid(string path) => File.Exists(Path.Combine(path, StartPath));
-        public new string GetLocalBuild() => new Installer.SteamCMD().GetLocalBuild(_serverData.ServerID, AppId);
-        public new async Task<string> GetRemoteBuild() => await new Installer.SteamCMD().GetRemoteBuild(AppId);
-            
-        
+        public bool CanBackup => true;
+        // O método Backup() foi removido para usar o nativo da SteamCMDAgent (Full Backup),
+        // evitando confusão sobre o RocksDB que ainda não está implementado via script.
     }
 }
